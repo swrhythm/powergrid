@@ -170,7 +170,7 @@
                 @endforeach
                 </span>
         @endif
-        <button class="home-button button" onclick="window.location.href='/addPlayer'">Add Player</button>
+        <button class="home-button button" onclick="window.location.href='/createSession'">Add Player</button>
         <button class="home-button1 button" onclick="window.location.href='/viewPlayer'">View Player</button>
     </div>
 </div>

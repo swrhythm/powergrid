@@ -105,6 +105,11 @@ class PlayerController extends Controller
         }
         if (in_array($player->type,["ModOpen","ModClosed"])) {
             $playerList = player::where('moderatorId',$player->id)->orderBy('houseCount','desc')->orderBy('largestPowerplant','desc')->get();
+
+            // If no players have been set up yet, send mod to the setup wizard
+            if ($playerList->isEmpty()) {
+                return Redirect::to('/setupPlayers?id='.$player->id.'&passcode='.urlencode($player->passCode));
+            }
             $lastTransaction = DB::table('player_transactions')
                                     ->join('players', 'player_transactions.playerId', '=', 'players.id')
                                     ->select('players.name', 'players.color', 'player_transactions.total', 'player_transactions.description')
@@ -147,11 +152,63 @@ class PlayerController extends Controller
                 ]
             );
         } else {
+            // If player still has the default password, force a password change
+            if ($player->passCode === '1234') {
+                return view('changePassword', ['player' => $player]);
+            }
+
             $transaction = playerTransaction::where('playerId', $player->id)->orderBy('id', 'desc')->take(10)->get();
             $total = playerTransaction::where('playerId', $player->id)->sum('total');
 
             return view('playerDetail', ['player' => $player, 'transaction' => $transaction, 'total' => $total]);
         }
+    }
+
+    /**
+     * Show change-password form (GET).
+     */
+    public function changePasswordForm(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'id'       => 'required|numeric',
+            'passcode' => 'required',
+        ]);
+        if ($validator->fails()) return Redirect::to('/viewPlayer')->withErrors($validator);
+
+        $player = player::where([
+            ['id',       $request->input('id')],
+            ['passCode', $request->input('passcode')],
+        ])->where('type', 'Player')->first();
+
+        if (!$player) return Redirect::to('/viewPlayer')->withErrors(['Player not found']);
+
+        return view('changePassword', ['player' => $player]);
+    }
+
+    /**
+     * Process password change (POST).
+     */
+    public function changePassword(Request $request)
+    {
+        $validator = \Validator::make($request->all(), [
+            'playerId'             => 'required|numeric',
+            'currentPasscode'      => 'required',
+            'new_password'         => 'required|min:4|confirmed',
+        ]);
+        if ($validator->fails()) return Redirect::back()->withErrors($validator);
+
+        $player = player::where([
+            ['id',       $request->input('playerId')],
+            ['passCode', $request->input('currentPasscode')],
+        ])->where('type', 'Player')->first();
+
+        if (!$player) return Redirect::back()->withErrors(['Invalid credentials']);
+
+        $player->passCode = $request->input('new_password');
+        $player->save();
+
+        $newPc = urlencode($player->passCode);
+        return Redirect::to("/playerDetail?id={$player->id}&passcode={$newPc}");
     }
     /**
      * Display a listing of the resource.

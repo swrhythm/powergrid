@@ -100,10 +100,16 @@
                                 @csrf
                                 <input type="hidden" name="moderatorId" value="{{$moderatorId}}">
                                 <input type="hidden" name="moderatorPasscode" value="{{$moderatorPasscode}}">
-                                @php $refill = $gameSession->getRefillAmounts(); @endphp
+                                @php
+                                    $refill   = $gameSession->getRefillAmounts();
+                                    $rCoal    = $refill['coal'];
+                                    $rOil     = $refill['oil'];
+                                    $rGarbage = $refill['garbage'];
+                                    $rUranium = $refill['uranium'];
+                                @endphp
                                 <button type="submit" class="btn btn-sm btn-outline-secondary"
-                                    title="Add: +{{$refill['coal']}} coal, +{{$refill['oil']}} oil, +{{$refill['garbage']}} garbage, +{{$refill['uranium']}} uranium"
-                                    onclick="return confirm('Refill market?\n+{{$refill[\'coal\']}} coal\n+{{$refill[\'oil\']}} oil\n+{{$refill[\'garbage\']}} garbage\n+{{$refill[\'uranium\']}} uranium')">
+                                    title="+{{ $rCoal }} coal, +{{ $rOil }} oil, +{{ $rGarbage }} garbage, +{{ $rUranium }} uranium"
+                                    onclick="return confirm('Refill market?\n+{{ $rCoal }} coal\n+{{ $rOil }} oil\n+{{ $rGarbage }} garbage\n+{{ $rUranium }} uranium')">
                                     ↺ Refill Market
                                 </button>
                             </form>
@@ -226,6 +232,19 @@
 
         {{-- ===== RIGHT COLUMN: Market, Expenses, Income ===== --}}
         <div class="col-md-8 col-sm-12 p-2">
+
+            {{-- ===== SETUP CHECKLIST (shown before game session starts) ===== --}}
+            @if(!$gameSession)
+            <div class="section-card border-warning" style="background:#fffbe6">
+                <h5 class="text-warning">⚙ Game Setup Checklist</h5>
+                <p class="small text-muted mb-2">Complete these steps before starting the game:</p>
+                <ul class="list-unstyled mb-0" style="font-size:14px">
+                    <li>✅ &nbsp;<strong>Players created</strong> — {{ count($playerList) }} players in this session (+50E each)</li>
+                    <li class="mt-1">🔲 &nbsp;<strong>Initial powerplant auction</strong> — Do the physical auction, then use <em>Add PP</em> below to record each player's card</li>
+                    <li class="mt-1">🔲 &nbsp;<strong>Start game session</strong> — Select player count and click <em>Start Game</em> on the left when the board is ready</li>
+                </ul>
+            </div>
+            @endif
 
             {{-- ===== RESOURCE MARKET BOARD ===== --}}
             @if($gameSession)
