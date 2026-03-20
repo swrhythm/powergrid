@@ -28,3 +28,14 @@ Route::post('/inputPlayerTransaction', [App\Http\Controllers\PlayerController::c
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+// Game Session & Market routes
+Route::post('/gameSession/setup',             [App\Http\Controllers\GameSessionController::class, 'setup'])->name('gameSession.setup');
+Route::post('/gameSession/advanceStep',       [App\Http\Controllers\GameSessionController::class, 'advanceStep'])->name('gameSession.advanceStep');
+Route::post('/gameSession/buyResource',       [App\Http\Controllers\GameSessionController::class, 'buyResource'])->name('gameSession.buyResource');
+Route::post('/gameSession/refillMarket',      [App\Http\Controllers\GameSessionController::class, 'refillMarket'])->name('gameSession.refillMarket');
+Route::post('/gameSession/addPowerplant',     [App\Http\Controllers\GameSessionController::class, 'addPowerplant'])->name('gameSession.addPowerplant');
+Route::post('/gameSession/replacePowerplant', [App\Http\Controllers\GameSessionController::class, 'replacePowerplant'])->name('gameSession.replacePowerplant');
+
+// Public market view (no auth required — for TV/big screen)
+Route::get('/market/{moderatorId}',           [App\Http\Controllers\GameSessionController::class, 'marketView'])->name('market.view');
