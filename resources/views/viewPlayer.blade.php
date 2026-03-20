@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>New Project</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="utf-8">
+    <meta property="twitter:card" content="summary_large_image">
+    <style>
+        html {  line-height: 1.15;}body {  margin: 0;}* {  box-sizing: border-box;  border-width: 0;  border-style: solid;}p,li,ul,pre,div,h1,h2,h3,h4,h5,h6 {  margin: 0;  padding: 0;}button,input,optgroup,select,textarea {  font-family: inherit;  font-size: 100%;  line-height: 1.15;  margin: 0;}button,select {  text-transform: none;}button,[type="button"],[type="reset"],[type="submit"] {  -webkit-appearance: button;}button::-moz-focus-inner,[type="button"]::-moz-focus-inner,[type="reset"]::-moz-focus-inner,[type="submit"]::-moz-focus-inner {  border-style: none;  padding: 0;}button:-moz-focus,[type="button"]:-moz-focus,[type="reset"]:-moz-focus,[type="submit"]:-moz-focus {  outline: 1px dotted ButtonText;}a {  color: inherit;  text-decoration: inherit;}input {  padding: 2px 4px;}img {  display: block;}
+    </style>
+    <style>
+        html {
+            font-family: Inter;
+            font-size: 16px;
+        }
+
+        body {
+            font-weight: 400;
+            font-style:normal;
+            text-decoration: none;
+            text-transform: none;
+            letter-spacing: normal;
+            line-height: 1.15;
+            color: var(--dl-color-gray-black);
+            background-color: var(--dl-color-gray-white);
+
+        }
+    </style>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&amp;display=swap">
+    <style>
+        :root {
+            --dl-color-gray-500: #595959;
+            --dl-color-gray-700: #999999;
+            --dl-color-gray-900: #D9D9D9;
+            --dl-size-size-large: 144px;
+            --dl-size-size-small: 48px;
+            --dl-color-danger-300: #A22020;
+            --dl-color-danger-500: #BF2626;
+            --dl-color-danger-700: #E14747;
+            --dl-color-gray-black: #000000;
+            --dl-color-gray-white: #FFFFFF;
+            --dl-size-size-medium: 96px;
+            --dl-size-size-xlarge: 192px;
+            --dl-size-size-xsmall: 16px;
+            --dl-space-space-unit: 16px;
+            --dl-color-primary-100: #003EB3;
+            --dl-color-primary-300: #0074F0;
+            --dl-color-primary-500: #14A9FF;
+            --dl-color-primary-700: #85DCFF;
+            --dl-color-success-300: #199033;
+            --dl-color-success-500: #32A94C;
+            --dl-color-success-700: #4CC366;
+            --dl-size-size-xxlarge: 288px;
+            --dl-size-size-maxwidth: 1400px;
+            --dl-radius-radius-round: 50%;
+            --dl-space-space-halfunit: 8px;
+            --dl-space-space-sixunits: 96px;
+            --dl-space-space-twounits: 32px;
+            --dl-radius-radius-radius2: 2px;
+            --dl-radius-radius-radius4: 4px;
+            --dl-radius-radius-radius8: 8px;
+            --dl-space-space-fiveunits: 80px;
+            --dl-space-space-fourunits: 64px;
+            --dl-space-space-threeunits: 48px;
+            --dl-space-space-oneandhalfunits: 24px;
+        }
+        .button {
+            color: var(--dl-color-gray-black);
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-color: var(--dl-color-gray-black);
+            border-width: 1px;
+            border-radius: 4px;
+            background-color: var(--dl-color-gray-white);
+        }
+        .input {
+            color: var(--dl-color-gray-black);
+            cursor: auto;
+            padding: 0.5rem 1rem;
+            border-color: var(--dl-color-gray-black);
+            border-width: 1px;
+            border-radius: 4px;
+            background-color: var(--dl-color-gray-white);
+        }
+        .textarea {
+            color: var(--dl-color-gray-black);
+            cursor: auto;
+            padding: 0.5rem;
+            border-color: var(--dl-color-gray-black);
+            border-width: 1px;
+            border-radius: 4px;
+            background-color: var(--dl-color-gray-white);
+        }
+        .list {
+            width: 100%;
+            margin: 1em 0px 1em 0px;
+            display: block;
+            padding: 0px 0px 0px 1.5rem;
+            list-style-type: none;
+            list-style-position: outside;
+        }
+        .list-item {
+            display: list-item;
+        }
+        .teleport-show {
+            display: flex !important;
+        }
+        .content {
+            font-size: 16px;
+            font-family: Inter;
+            font-weight: 400;
+            line-height: 1.15;
+            text-transform: none;
+            text-decoration: none;
+        }
+        .heading {
+            font-size: 32px;
+            font-family: Inter;
+            font-weight: 700;
+            line-height: 1.15;
+            text-transform: none;
+            text-decoration: none;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <style>
+        .home-container {
+            width: 100%;
+            display: flex;
+            overflow: auto;
+            min-height: 100vh;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .home-text {
+            font-size: 72px;
+            margin-bottom: var(--dl-space-space-twounits);
+        }
+        .home-container1 {
+            height: 67px;
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--dl-space-space-halfunit);
+            flex-direction: column;
+            justify-content: center;
+        }
+        .home-text1 {
+            align-self: flex-start;
+            margin-bottom: var(--dl-space-space-halfunit);
+        }
+        .home-textinput {
+            width: 322px;
+        }
+        .home-container2 {
+            height: 67px;
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--dl-space-space-halfunit);
+            flex-direction: column;
+            justify-content: center;
+        }
+        .home-text2 {
+            align-self: flex-start;
+            margin-bottom: var(--dl-space-space-halfunit);
+        }
+        .home-textinput1 {
+            width: 322px;
+        }
+        .home-container3 {
+            height: 67px;
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--dl-space-space-halfunit);
+            flex-direction: column;
+            justify-content: center;
+        }
+        .home-text3 {
+            align-self: flex-start;
+            margin-bottom: var(--dl-space-space-halfunit);
+        }
+        .home-textinput2 {
+            width: 322px;
+        }
+        .home-container4 {
+            height: 67px;
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--dl-space-space-halfunit);
+            flex-direction: column;
+            justify-content: center;
+        }
+        .home-text4 {
+            align-self: flex-start;
+            margin-bottom: var(--dl-space-space-halfunit);
+        }
+        .home-textinput3 {
+            width: 322px;
+        }
+        .home-container5 {
+            height: 67px;
+            display: flex;
+            align-items: center;
+            margin-bottom: var(--dl-space-space-halfunit);
+            flex-direction: column;
+            justify-content: center;
+        }
+        .home-text5 {
+            align-self: flex-start;
+            margin-bottom: var(--dl-space-space-halfunit);
+        }
+        .home-textinput4 {
+            width: 322px;
+        }
+        .home-button {
+            width: 322px;
+            font-size: 24px;
+            margin-top: var(--dl-space-space-twounits);
+            text-align: center;
+            transition: 0.3s;
+            background-color: var(--dl-color-success-700);
+        }
+        .home-button:hover {
+            background-color: var(--dl-color-success-300);
+        }
+    </style>
+    <div>
+        <link href="./home.css" rel="stylesheet" />
+        <form action="/playerDetail" method="GET">
+            @csrf
+            @method('GET')
+            <div class="home-container">
+                <span class="home-text">View Player</span>
+                @if($errors->any())
+                    <span class="home-text" style="color: red;font-size: 16px">
+                @foreach ($errors->all() as $error)
+                            - {{ $error }}<br>
+                        @endforeach
+                </span>
+                @endif
+                <div class="home-container1">
+                    <span class="home-text1">Id</span>
+                    <input
+                        type="text"
+                        placeholder="Input Player ID"
+                        class="home-textinput input"
+                        name="id"
+                        value="{{old('id')}}"
+                        required
+                    />
+                </div>
+                <div class="home-container1">
+                    <span class="home-text1">Passcode</span>
+                    <input
+                        type="password"
+                        placeholder="Input Passcode"
+                        class="home-textinput input"
+                        name="passcode"
+                        required
+                    />
+                </div>
+                <button type="submit" class="home-button button">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>
