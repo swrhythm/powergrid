@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\player;
 use App\Models\playerTransaction;
+use App\Models\GameSession;
+use App\Models\PlayerPowerplant;
+use App\Models\PlayerResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Redirect;
@@ -109,14 +112,38 @@ class PlayerController extends Controller
                                     ->orderBy('player_transactions.created_at', 'desc')
                                     ->limit(10)
                                     ->get();
+
+            // Load game session and per-player resource/powerplant data
+            $gameSession = GameSession::where('moderator_id', $player->id)->first();
+            $playerResources   = [];
+            $playerPowerplants = [];
+            $playerMaxStorage  = [];
+            if ($gameSession) {
+                foreach ($playerList as $p) {
+                    $playerResources[$p->id] = PlayerResource::where([
+                        'player_id'       => $p->id,
+                        'game_session_id' => $gameSession->id,
+                    ])->first();
+                    $playerPowerplants[$p->id] = PlayerPowerplant::where([
+                        'player_id'       => $p->id,
+                        'game_session_id' => $gameSession->id,
+                    ])->with('card')->get();
+                    $playerMaxStorage[$p->id] = PlayerResource::calcMaxStorage($p->id, $gameSession->id);
+                }
+            }
+
             return view(
                 'moderatorView',
                 [
-                    'playerList' => $playerList,
-                    'moderatorId'=>$player->id,
-                    'moderatorPasscode'=>$player->passCode,
-                    'moderatorType'=>$player->type,
-                    'lastTransaction'=>$lastTransaction
+                    'playerList'        => $playerList,
+                    'moderatorId'       => $player->id,
+                    'moderatorPasscode' => $player->passCode,
+                    'moderatorType'     => $player->type,
+                    'lastTransaction'   => $lastTransaction,
+                    'gameSession'       => $gameSession,
+                    'playerResources'   => $playerResources,
+                    'playerPowerplants' => $playerPowerplants,
+                    'playerMaxStorage'  => $playerMaxStorage,
                 ]
             );
         } else {
