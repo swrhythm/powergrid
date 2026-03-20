@@ -230,8 +230,6 @@
     <div>
         <link href="./home.css" rel="stylesheet" />
         <form action="/playerDetail" method="GET">
-            @csrf
-            @method('GET')
             <div class="home-container">
                 <span class="home-text">View Player</span>
                 @if($errors->any())

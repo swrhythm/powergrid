@@ -39,3 +39,12 @@ Route::post('/gameSession/replacePowerplant', [App\Http\Controllers\GameSessionC
 
 // Public market view (no auth required — for TV/big screen)
 Route::get('/market/{moderatorId}',           [App\Http\Controllers\GameSessionController::class, 'marketView'])->name('market.view');
+
+// Guided onboarding flow
+Route::get('/createSession',    [App\Http\Controllers\SessionSetupController::class, 'createSessionForm'])->name('createSession');
+Route::post('/createSession',   [App\Http\Controllers\SessionSetupController::class, 'createSession']);
+Route::get('/sessionCreated',   [App\Http\Controllers\SessionSetupController::class, 'sessionCreated'])->name('sessionCreated');
+Route::get('/setupPlayers',     [App\Http\Controllers\SessionSetupController::class, 'setupPlayersForm'])->name('setupPlayers');
+Route::post('/setupPlayers',    [App\Http\Controllers\SessionSetupController::class, 'setupPlayers']);
+Route::get('/changePassword',   [App\Http\Controllers\PlayerController::class, 'changePasswordForm'])->name('changePassword');
+Route::post('/changePassword',  [App\Http\Controllers\PlayerController::class, 'changePassword']);
